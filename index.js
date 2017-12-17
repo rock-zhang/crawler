@@ -44,46 +44,66 @@ const downloadingLogger = log4js.getLogger('downloading');
 const downloadedLogger = log4js.getLogger('done');
 
 
-const listPageUrl = 'http://91porn.com/video.php?category=rf&page=4',
+const listPageUrl = 'http://91porn.com/video.php?category=rf&page=1',
     videoPageBase = 'http://91porn.com/view_video.php';
 
 htmlFetch(listPageUrl).then($ => {
     $('#videobox .listchannel').each(async function (i, elem) {
         const url = $(this).find('a').attr('href'),
             viewkey = new URLSearchParams(URL.parse(url).query).get('viewkey'),
-            videoID = await getVideoId(videoPageUrlParse(viewkey)),
-            videoName = `${videoID}.mp4`;
+            videoInfo = await getVideoInfo(videoPageUrlParse(viewkey));
 
-        downloadingLogger.fatal(viewkey, '-', getVideoURL(videoName));
+        console.log('videoUrl', videoInfo);
 
-        download(getVideoURL(videoName), videoName);
+        download(videoInfo.url, `${videoInfo.name}.mp4`);
     });
 });
 
-function htmlFetch(url) {
+function getRandomIP() {
+    const bytes = new Array(4);
+    return bytes.map(b => Math.floor(Math.random() * 255));
+}
+
+function htmlFetch(url, flag) {
     return new Promise(resolve => {
-        request(url, function (error, response, body) {
+        const options = {
+            url,
+            headers: {
+                'X-Forwarded-For': getRandomIP()
+            }
+        };
+
+        request(options, function (error, response, body) {
             if (error)
                 logger.error('request error:', error);
 
             logger.debug(`${url} response:`, response.statusCode);
+
             resolve(cheerio.load(body));
         });
     });
 }
 
-function getVideoId(url) {
-    return htmlFetch(url).then($ => {
-        const reg = /(?<=fxFeatureVideo\(0\, )\d+(?=\)\;)/;
+function getVideoInfo(url) {
+    return htmlFetch(url, true).then($ => {
+        let videoUrl = '';
+        const nameReg = /(?<=fxFeatureVideo\(0\, )\d+(?=\)\;)/,
+            urlReg = /(?<=source src=\").+(?=\" type)/;
 
-        return reg.exec($.html())[0];
+        try {
+            videoUrl = urlReg.exec($.html())[0];
+            videoUrl = videoUrl.replace('amp;', '');
+        } catch (e) {
+            downloadErrorLogger.error('getVideoInfo: 正则表达式匹配出错', url, videoUrl);
+        }
+
+        return {
+            url: videoUrl,
+            name: nameReg.exec($.html())[0]
+        };
     }).catch(e => {
-        logger.error('getVideoId:', e);
+        logger.error('getVideoInfo:', e);
     });
-}
-
-function getVideoURL(videoName) {
-    return `http://g.t4k.space//mp43/${videoName}`;
 }
 
 function videoPageUrlParse(viewkey) {
@@ -104,6 +124,10 @@ function download(url, filename) {
     } else {
         dl = downloader.download(url, './download/' + filename);
     }
+
+    dl.setRetryOptions({
+        maxRetries: 30		// Default: 5
+    });
 
     dl.on('start', (dl) => {
         logger.info('EVENT - Download start ' + url)
@@ -150,9 +174,6 @@ function download(url, filename) {
 
     dl.start();
 }
-
-// download('http://g.t4k.space//mp43/244756.mp4', '244756.mp4');
-
 
 function deleteMTDFile(filename) {
     const mtd = './download/' + filename + '.mtd';
