@@ -6,6 +6,13 @@ const { URLSearchParams } = URL;
 const Downloader = require('mt-files-downloader');
 const downloader = new Downloader();
 const log4js = require('log4js');
+const genericPool = require("generic-pool");
+const redis = require("redis"),
+    redisClient = redis.createClient();
+
+redisClient.on("error", function (err) {
+    console.log("redisClient Error " + err);
+});
 
 log4js.configure({
     appenders: {
@@ -47,17 +54,56 @@ const downloadedLogger = log4js.getLogger('done');
 const listPageUrl = 'http://91porn.com/video.php?category=rf&page=1',
     videoPageBase = 'http://91porn.com/view_video.php';
 
-htmlFetch(listPageUrl).then($ => {
-    $('#videobox .listchannel').each(async function (i, elem) {
-        const url = $(this).find('a').attr('href'),
-            viewkey = new URLSearchParams(URL.parse(url).query).get('viewkey'),
-            videoInfo = await getVideoInfo(videoPageUrlParse(viewkey));
 
-        console.log('videoUrl', videoInfo);
 
-        download(videoInfo.url, `${videoInfo.name}.mp4`);
-    });
+let page = 1;
+
+function getPageCount() {
+    return page++;
+}
+
+const factory = {
+    create: function () {
+        const listPageUrl = `http://91porn.com/video.php?category=rf&page=${getPageCount()}`;
+
+        return listPageUrl;
+    },
+    destroy: function (listPageUrl) {
+        console.log('destroy', listPageUrl);
+    }
+};
+
+const downloadPool = genericPool.createPool(factory, {
+    max: 4, // maximum size of the pool
+    min: 2 // minimum size of the pool
 });
+
+const pageCount = 118, videoInfoList = [];
+let i = 1;
+while (i < pageCount) {
+    const resourcePromise = downloadPool.acquire();
+
+    resourcePromise.then(function (listPageUrl) {
+        console.log('resourcePromise:', listPageUrl);
+
+        htmlFetch(listPageUrl).then($ => {
+            $('#videobox .listchannel').each(async function (i, elem) {
+                const url = $(this).find('a').attr('href'),
+                    viewkey = new URLSearchParams(URL.parse(url).query).get('viewkey'),
+                    videoInfo = await getVideoInfo(videoPageUrlParse(viewkey));
+
+                videoInfoList.push(videoInfo);
+                console.log('videoUrl', videoInfo, videoInfoList.length);
+            });
+
+            downloadPool.release(listPageUrl);
+        });
+    }).catch(function (err) {
+        console.log('downloadPool resourcePromise catch', err);
+    });
+
+    i++;
+}
 
 function getRandomIP() {
     const bytes = new Array(4);
