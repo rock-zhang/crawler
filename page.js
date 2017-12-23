@@ -64,7 +64,7 @@ while (i < pageCount) {
 function getVideoInfo(url, viewkey) {
     return htmlFetch(url, true).then($ => {
         let videoUrl = '', duration = '', name = '';
-        const nameReg = /(?<=fxFeatureVideo\(0\, )\d+(?=\)\;)/,
+        const nameReg = /(?<=mp43\/)\d+(?=\.mp4?)/,
             urlReg = /(?<=source src=\").+(?=\" type)/,
             durationReg = /(?<=&#x65F6;&#x957F;:\<\/span\> ).+(?=\n&#xA0;\<sp)/,
             html = $.html();
@@ -75,7 +75,7 @@ function getVideoInfo(url, viewkey) {
             videoUrl = videoUrl.replace('amp;', '');
 
             duration = durationReg.exec(html);
-            name = nameReg.exec(html)[0];
+            name = nameReg.exec(videoUrl);
         } catch (e) {
             downloadErrorLogger.error('getVideoInfo: 正则表达式匹配出错', url, videoUrl);
         }
