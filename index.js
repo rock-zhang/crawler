@@ -6,7 +6,7 @@ const downloader = new Downloader();
 const genericPool = require("generic-pool");
 const {
     redisClient,
-    logger, downloadErrorLogger, downloadingLogger, downloadedLogger,
+    logger, downloadedLogger,
     getRandomIP,
     htmlFetch
 } = require('./util');
@@ -76,14 +76,14 @@ function download(url, filename, callback) {
         logger.info('EVENT - Download start ' + url)
         logger.debug(dl.getStats());
 
-        downloadingLogger.info(filename);
+        logger.info(filename);
     });
 
     dl.on('error', function () {
         logger.error('EVENT - Download error ! ' + url);
         logger.error(dl.error);
 
-        downloadErrorLogger.error(filename);
+        logger.error(filename);
         deleteMTDFile(filename);
         callback();
     });
@@ -105,7 +105,7 @@ function download(url, filename, callback) {
         logger.error('EVENT - Download destroyed ! ' + url);
         logger.error(dl.getStats());
 
-        downloadErrorLogger.error(filename);
+        logger.error(filename);
         callback();
     });
 
@@ -113,7 +113,7 @@ function download(url, filename, callback) {
         logger.error('EVENT - Download stopped ! ' + url);
         logger.error(dl.getStats());
 
-        downloadErrorLogger.error(filename);
+        logger.error(filename);
         callback();
     });
 

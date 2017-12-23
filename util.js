@@ -25,29 +25,16 @@ log4js.configure({
         done: {
             type: 'dateFile', filename: `./logs/done.log`, maxLogSize: 10458760, pattern: '.yyyy-MM', compress: true,
             layout: { type: 'coloured' }
-        },
-        downloading: {
-            type: 'dateFile', filename: `./logs/downloading.log`, maxLogSize: 10458760, pattern: '.yyyy-MM', compress: true,
-            layout: { type: 'coloured' }
-        },
-        error: {
-            type: 'dateFile', filename: `./logs/error.log`, maxLogSize: 10458760, pattern: '.yyyy-MM', compress: true,
-            layout: { type: 'coloured' }
         }
     },
     categories: {
         default: { appenders: ['everything', 'console'], level: 'debug' },
-        done: { appenders: ['done'], level: 'debug' },
-        downloading: { appenders: ['downloading'], level: 'debug' },
-        error: { appenders: ['error'], level: 'debug' }
+        done: { appenders: ['done'], level: 'debug' }
     }
 });
 
 const logger = log4js.getLogger();
-const downloadErrorLogger = log4js.getLogger('error');
-const downloadingLogger = log4js.getLogger('downloading');
 const downloadedLogger = log4js.getLogger('done');
-
 
 function getRandomIP() {
     const bytes = new Array(4);
@@ -82,8 +69,6 @@ function htmlFetch(url, flag) {
 
 module.exports = {
     logger,
-    downloadErrorLogger,
-    downloadingLogger,
     downloadedLogger,
 
     getRandomIP,

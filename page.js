@@ -4,7 +4,7 @@ const { URLSearchParams } = URL;
 const genericPool = require("generic-pool");
 const {
     redisClient,
-    logger, downloadErrorLogger, downloadingLogger, downloadedLogger,
+    logger, downloadedLogger,
     getRandomIP,
     htmlFetch
  } = require('./util');
@@ -42,10 +42,16 @@ while (i < pageCount) {
 
                 redisClient.hgetallAsync(viewkey).then(async videoInfo => {
                     if (!videoInfo) {
-                        const videoInfo = await getVideoInfo(videoPageUrlParse(viewkey), viewkey);
-                        redisClient.hmset(viewkey, videoInfo);
+                        let videoInfo;
+                        try {
+                            videoInfo = await getVideoInfo(videoPageUrlParse(viewkey), viewkey);
 
-                        console.log(viewkey, videoInfo);
+                            videoInfo && redisClient.hmset(viewkey, videoInfo);
+
+                            console.log(viewkey, videoInfo);
+                        } catch (e) {
+                            console.error('getVideoInfo catch:', e);
+                        }
                     } else {
                         console.log(`key exsit ${viewkey}`);
                     }
@@ -71,13 +77,14 @@ function getVideoInfo(url, viewkey) {
 
         try {
             const urlDom = urlReg.exec(html);
-            videoUrl = urlDom && urlDom[0] || '';
+            videoUrl = urlDom[0];
             videoUrl = videoUrl.replace('amp;', '');
 
             duration = durationReg.exec(html);
             name = nameReg.exec(videoUrl);
         } catch (e) {
-            downloadErrorLogger.error('getVideoInfo: 正则表达式匹配出错', url, videoUrl);
+            logger.error('getVideoInfo: 正则表达式匹配出错', url, videoUrl);
+            return Promise.reject(new Error('getVideoInfo: 正则表达式匹配出错'));
         }
 
         return {
@@ -85,10 +92,8 @@ function getVideoInfo(url, viewkey) {
             name: name && name[0] + '_' + viewkey + '.mp4',
             title: $('#viewvideo-title').text().replace(/\n/g, ''),
             duration: duration && duration[0] || '',
-            date: $('#videodetails #videodetails-content > .title').html()
-        };
-    }).catch(e => {
-        logger.error('getVideoInfo:', e);
+            date: $('#videodetails #videodetails-content > .title').eq(0).html() || ''
+        }
     });
 }
 
