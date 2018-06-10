@@ -37,8 +37,8 @@ const logger = log4js.getLogger();
 const downloadedLogger = log4js.getLogger('done');
 
 function getRandomIP() {
-    const bytes = new Array(4);
-    return bytes.map(b => Math.floor(Math.random() * 255));
+    const bytes = [1, 2, 3, 4];
+    return bytes.map(b => Math.floor(Math.random() * 255)).join('.');
 }
 
 function htmlFetch(url, flag) {
