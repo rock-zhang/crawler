@@ -7,11 +7,12 @@ const {
     logger, downloadedLogger,
     getRandomIP,
     htmlFetch
- } = require('./util');
+} = require('./util');
 const { videoPageBase, listPageBase } = require('./config.json');
+const puppeteer = require('puppeteer');
 
 let page = 1;
-function getPageCount() {
+function getPageCount () {
     return page++;
 }
 
@@ -29,9 +30,11 @@ const pagePool = genericPool.createPool(factory, {
     min: 2 // minimum size of the pool
 });
 
-const pageCount = 118, videoInfoList = [];
+const pageCount = 8, videoInfoList = [];
 let i = 1;
 while (i < pageCount) {
+    const browser = await puppeteer.launch()
+
     pagePool.acquire().then(function (client) {
         const listPageUrl = `${listPageBase}?category=rf&page=${getPageCount()}`;
 
@@ -67,11 +70,13 @@ while (i < pageCount) {
     i++;
 }
 
-function getVideoInfo(url, viewkey) {
+function getVideoInfo (url, viewkey) {
     return htmlFetch(url, true).then($ => {
         let videoUrl = '', duration = '', name = '';
         const nameReg = /(?<=mp43\/)\d+(?=\.mp4?)/,
-            urlReg = /(?<=source src=\").+(?=\" type)/,
+            // urlReg = /(?<=source src=\").+(?=\" type)/,
+            // http://img2.t6k.co/thumb
+            urlReg = /(?<=http:\/\/img2\.t6k\.co\/thumb\/)\d+(?=\.jpg)/,
             durationReg = /(?<=&#x65F6;&#x957F;:\<\/span\> ).+(?=\n&#xA0;\<sp)/,
             html = $.html();
 
@@ -80,23 +85,26 @@ function getVideoInfo(url, viewkey) {
             videoUrl = urlDom[0];
             videoUrl = videoUrl.replace('amp;', '');
 
+            videoUrl = 'http://220.112.193.198/mp4files/200400000739C867/185.38.13.130//mp43/' + videoUrl + '.mp4'
             duration = durationReg.exec(html);
             name = nameReg.exec(videoUrl);
         } catch (e) {
-            logger.error('getVideoInfo: 正则表达式匹配出错', url, videoUrl);
+            logger.error('getVideoInfo: 正则表达式匹配出错', url, videoUrl, e);
             return Promise.reject(new Error('getVideoInfo: 正则表达式匹配出错'));
         }
 
+        const title = $('#viewvideo-title').text().replace(/\n/g, '').trim()
         return {
             url: videoUrl,
-            name: name && name[0] + '_' + viewkey + '.mp4',
-            title: $('#viewvideo-title').text().replace(/\n/g, ''),
+            // name: name && name[0] + '_' + viewkey + '.mp4',
+            name: `${title}.mp4`,
+            title,
             duration: duration && duration[0] || '',
             date: $('#videodetails #videodetails-content > .title').eq(0).html() || ''
         }
     });
 }
 
-function videoPageUrlParse(viewkey) {
+function videoPageUrlParse (viewkey) {
     return `${videoPageBase}?${new URLSearchParams({ viewkey }).toString()}`;
 }

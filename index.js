@@ -1,6 +1,7 @@
 const fs = require('fs');
 const URL = require('url');
 const { URLSearchParams } = URL;
+const http = require('http')
 const Downloader = require('mt-files-downloader');
 const downloader = new Downloader();
 const genericPool = require("generic-pool");
@@ -13,7 +14,7 @@ const {
 const config = require('./config.json');
 
 let page = 1;
-function getPageCount() {
+function getPageCount () {
     return page++;
 }
 
@@ -36,10 +37,10 @@ redisClient.keysAsync('*').then(keys => {
     const len = keys.length;
 
     keys.forEach(viewkey => {
-        downloadPool.acquire().then(function (client) {
+        downloadPool.acquire().then(async function (client) {
             redisClient.hgetallAsync(viewkey).then(async videoInfo => {
                 console.log('videoInfo:', videoInfo)
-                download(videoInfo.url, videoInfo.name, () => {
+                await download(videoInfo.url, videoInfo.name, () => {
                     downloadPool.release(client);
                 });
             });
@@ -48,12 +49,34 @@ redisClient.keysAsync('*').then(keys => {
 })
 
 
-function videoPageUrlParse(viewkey) {
+function videoPageUrlParse (viewkey) {
     return `${videoPageBase}?${new URLSearchParams({ viewkey }).toString()}`;
 }
 
-function download(url, filename, callback) {
+const getRedirectUrl = async url => {
+    return new Promise((resolve, reject) => {
+        http.get(url, (res) => {
+            console.log('statusCode', url, res.statusCode, res.headers.location)
+            if (res.statusCode === 302) {
+                resolve(res.headers.location)
+            } else {
+                resolve(url)
+            }
+        })
+    })
+}
+
+// download('http://185.38.13.130//mp43/307569.mp4?st=n--txAybzBmknzWMK2PuAw&amp;e=1554118685', 'test.mp4', () => {
+//     console.log('download..........')
+// })
+
+
+async function download (url, filename, callback) {
     const mtdPath = config.downloadPath + filename + '.mtd';
+
+    url = await getRedirectUrl(url)
+
+    console.log('url:', url)
 
     if (fs.existsSync(config.downloadPath + filename)) {
         logger.warn(config.downloadPath + filename + ' is exsit...');
@@ -122,12 +145,12 @@ function download(url, filename, callback) {
     dl.start();
 }
 
-function deleteMTDFile(filename) {
+function deleteMTDFile (filename) {
     const mtd = config.downloadPath + filename + '.mtd';
     fs.unlink(mtd, () => logger.debug(mtd + ' deleted..'));
 }
 
-function printStats(dl, filename) {
+function printStats (dl, filename) {
     let timer = setInterval(function () {
         if (dl.status == 0) {
             logger.debug('Download ' + filename + ' not started.');
