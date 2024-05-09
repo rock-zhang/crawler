@@ -1,9 +1,39 @@
-<mxfile host="app.diagrams.net" modified="2024-05-09T03:48:22.909Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" version="24.2.2" etag="97xVA8JmdWHi_MfGCS9A" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-09T04:08:38.549Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" etag="ki2buS-j2fgrg2CWgSbu" version="24.2.2" type="github">
   <diagram name="第 1 页" id="0vfUEZrYk6t0Ua8X4BwB">
-    <mxGraphModel>
+    <mxGraphModel dx="1434" dy="790" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="wsRNm5e_xSRv28iNJZ4b-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wsRNm5e_xSRv28iNJZ4b-1" target="wsRNm5e_xSRv28iNJZ4b-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wsRNm5e_xSRv28iNJZ4b-1" value="测试环境" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wsRNm5e_xSRv28iNJZ4b-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wsRNm5e_xSRv28iNJZ4b-12" target="wsRNm5e_xSRv28iNJZ4b-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wsRNm5e_xSRv28iNJZ4b-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wsRNm5e_xSRv28iNJZ4b-12" target="wsRNm5e_xSRv28iNJZ4b-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wsRNm5e_xSRv28iNJZ4b-12" value="预发布" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wsRNm5e_xSRv28iNJZ4b-16" value="与国内同一集群，已开启gzip，所有接口调用皆正常" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="570" y="235" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wsRNm5e_xSRv28iNJZ4b-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wsRNm5e_xSRv28iNJZ4b-17" target="wsRNm5e_xSRv28iNJZ4b-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wsRNm5e_xSRv28iNJZ4b-17" value="导购流程验证通过" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="600" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wsRNm5e_xSRv28iNJZ4b-19" value="" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="800" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wsRNm5e_xSRv28iNJZ4b-21" value="生产" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="400" y="510" width="120" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
