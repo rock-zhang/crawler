@@ -35,7 +35,7 @@
         <mxCell id="uWUnNED6HEl2aK5fdaIb-13" value="master" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontStyle=1;fontFamily=Courier New;" parent="1" vertex="1">
           <mxGeometry x="88.75" y="190" width="50" height="42" as="geometry" />
         </mxCell>
-        <mxCell id="uWUnNED6HEl2aK5fdaIb-14" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;html=1;exitX=0.855;exitY=0.145;exitPerimeter=0;endArrow=none;endFill=0;jettySize=auto;orthogonalLoop=1;strokeWidth=4;fontSize=15;exitDx=0;exitDy=0;" parent="1" source="uWUnNED6HEl2aK5fdaIb-69" target="9hBKPDzoitwpIBdzFDQ7-16" edge="1">
+        <mxCell id="uWUnNED6HEl2aK5fdaIb-14" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;html=1;exitX=0.855;exitY=0.145;exitPerimeter=0;endArrow=none;endFill=0;jettySize=auto;orthogonalLoop=1;strokeWidth=4;fontSize=15;exitDx=0;exitDy=0;dashed=1;" parent="1" source="uWUnNED6HEl2aK5fdaIb-69" target="9hBKPDzoitwpIBdzFDQ7-16" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="446.75" y="296" as="targetPoint" />
           </mxGeometry>
@@ -143,7 +143,7 @@
             <mxPoint x="1078.75" y="242" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9hBKPDzoitwpIBdzFDQ7-15" value="&lt;span style=&quot;text-align: center&quot;&gt;代码合入develop之后触发gitlab CI，升级版本号之后合入master&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=12;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+        <mxCell id="9hBKPDzoitwpIBdzFDQ7-15" value="&lt;span style=&quot;text-align: center&quot;&gt;1、代码合入develop之后触发gitlab CI，升级版本号之后合入master&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;text-align: center&quot;&gt;2、master代码需同步至release&lt;/span&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=12;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="1090" y="245" width="167.75" height="81" as="geometry" />
         </mxCell>
         <mxCell id="9hBKPDzoitwpIBdzFDQ7-16" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;strokeWidth=4;shape=mxgraph.flowchart.on-page_reference;plain-blue;gradientColor=#EA6B66;strokeColor=#B85450;fillColor=#F8CECC;" parent="1" vertex="1">
@@ -221,7 +221,7 @@
             <mxPoint x="634" y="545" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="vhE-VgnT0NR1zCwTLedf-21" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;strokeWidth=4;fontFamily=Courier New;fontColor=#009900;" edge="1" parent="1" source="uWUnNED6HEl2aK5fdaIb-95" target="vhE-VgnT0NR1zCwTLedf-15">
+        <mxCell id="vhE-VgnT0NR1zCwTLedf-21" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;strokeWidth=4;fontFamily=Courier New;fontColor=#009900;dashed=1;" edge="1" parent="1" source="uWUnNED6HEl2aK5fdaIb-95" target="vhE-VgnT0NR1zCwTLedf-15">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="887" y="480" as="sourcePoint" />
             <mxPoint x="794" y="545" as="targetPoint" />
