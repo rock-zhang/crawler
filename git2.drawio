@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36" version="26.0.16">
   <diagram id="yPxyJZ8AM_hMuL3Unpa9" name="complex gitflow">
-    <mxGraphModel dx="1259" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+    <mxGraphModel dx="1196" dy="855" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -265,43 +265,43 @@
             <mxPoint x="440" y="465" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="-khzPFQaLt4pRkQV-DD_-1" value="&lt;span style=&quot;text-align: center&quot;&gt;生产部署后，自动合入develop&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=12;fontStyle=0;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="-khzPFQaLt4pRkQV-DD_-1" value="&lt;span style=&quot;text-align: center&quot;&gt;生产部署后，自动合入develop&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=12;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="431.5" y="474.5" width="140" height="35.5" as="geometry" />
         </mxCell>
-        <mxCell id="-khzPFQaLt4pRkQV-DD_-2" value="" style="endArrow=classic;html=1;strokeWidth=1;fontFamily=Courier New;fontColor=#009900;" edge="1" parent="1">
+        <mxCell id="-khzPFQaLt4pRkQV-DD_-2" value="" style="endArrow=classic;html=1;strokeWidth=1;fontFamily=Courier New;fontColor=#009900;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="427.25" y="510" as="sourcePoint" />
             <mxPoint x="427.25" y="470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="-khzPFQaLt4pRkQV-DD_-3" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeWidth=4;fontFamily=Courier New;fontColor=#009900;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="-khzPFQaLt4pRkQV-DD_-4">
+        <mxCell id="-khzPFQaLt4pRkQV-DD_-3" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeWidth=4;fontFamily=Courier New;fontColor=#009900;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="-khzPFQaLt4pRkQV-DD_-4" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="670" y="341" as="sourcePoint" />
             <mxPoint x="550" y="226" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="-khzPFQaLt4pRkQV-DD_-4" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;strokeWidth=4;shape=mxgraph.flowchart.on-page_reference;plain-purple;gradientColor=none;strokeColor=#000000;fillColor=#D5E8D4;" vertex="1" parent="1">
+        <mxCell id="-khzPFQaLt4pRkQV-DD_-4" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;strokeWidth=4;shape=mxgraph.flowchart.on-page_reference;plain-purple;gradientColor=none;strokeColor=#000000;fillColor=#D5E8D4;" parent="1" vertex="1">
           <mxGeometry x="630" y="440" width="30" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="-khzPFQaLt4pRkQV-DD_-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeWidth=4;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" target="-khzPFQaLt4pRkQV-DD_-4">
+        <mxCell id="-khzPFQaLt4pRkQV-DD_-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeWidth=4;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" target="-khzPFQaLt4pRkQV-DD_-4" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="440" y="454.47" as="sourcePoint" />
             <mxPoint x="588" y="454.47" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="-khzPFQaLt4pRkQV-DD_-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeWidth=4;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" target="uWUnNED6HEl2aK5fdaIb-84">
+        <mxCell id="-khzPFQaLt4pRkQV-DD_-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeWidth=4;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" target="uWUnNED6HEl2aK5fdaIb-84" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="660" y="454.26" as="sourcePoint" />
             <mxPoint x="740" y="455.26" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="-khzPFQaLt4pRkQV-DD_-7" value="" style="endArrow=classic;html=1;strokeWidth=1;fontFamily=Courier New;fontColor=#009900;" edge="1" parent="1">
+        <mxCell id="-khzPFQaLt4pRkQV-DD_-7" value="" style="endArrow=classic;html=1;strokeWidth=1;fontFamily=Courier New;fontColor=#009900;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="565" y="270" as="sourcePoint" />
             <mxPoint x="565" y="230" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="-khzPFQaLt4pRkQV-DD_-8" value="&lt;span style=&quot;text-align: center&quot;&gt;1、代码合入develop之后触发gitlab CI，升级版本号之后合入master&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;text-align: center&quot;&gt;2、master代码需同步至release&lt;/span&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=12;fontStyle=0;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="-khzPFQaLt4pRkQV-DD_-8" value="&lt;span style=&quot;text-align: center&quot;&gt;1、代码合入develop之后触发gitlab CI，升级版本号之后合入master&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;text-align: center&quot;&gt;2、master代码需同步至release&lt;/span&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=12;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="572.5" y="228" width="167.75" height="81" as="geometry" />
         </mxCell>
       </root>
